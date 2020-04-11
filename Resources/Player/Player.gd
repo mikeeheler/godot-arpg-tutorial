@@ -27,7 +27,11 @@ func _physics_process(delta):
         ROLL:
             pass
         ATTACK:
-            attack_state(delta)
+            pass
+            
+func _process(delta):
+    if state == ATTACK:
+        attack_state(delta)
     
 func attack_state(_delta):
     velocity = Vector2.ZERO
