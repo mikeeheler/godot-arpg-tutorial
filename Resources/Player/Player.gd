@@ -1,26 +1,31 @@
 extends KinematicBody2D
 
-const ACCELERATION = 500
-const FRICTION = 500
-const MAX_SPEED = 80
-const ROLL_SPEED = 120
-
 enum {
     MOVE,
     ROLL,
     ATTACK
 }
 
+const ACCELERATION = 500
+const FRICTION = 500
+const MAX_SPEED = 80
+const ROLL_SPEED = 120
+
 var roll_vector = Vector2.DOWN
 var state = MOVE
+var stats = PlayerStats
 var velocity = Vector2.ZERO
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+onready var hurtbox = $Hurtbox
+
 
 func _ready():
+    stats.connect("no_health", self, "queue_free")
     animationTree.active = true
+
 
 func _physics_process(delta):
     match state:
@@ -31,14 +36,17 @@ func _physics_process(delta):
         ATTACK:
             pass
 
+
 func _process(delta):
     if state == ATTACK:
         attack_state(delta)
     elif state == ROLL:
         roll_state(delta)
 
+
 func attack_animation_finished():
     state = MOVE
+
 
 func attack_state(_delta):
     velocity = Vector2.ZERO
@@ -75,6 +83,13 @@ func roll_animation_finished():
     velocity = Vector2.ZERO
     state = MOVE
 
+
 func roll_state(_delta):
     animationState.travel("Roll")
     velocity = move_and_slide(roll_vector * ROLL_SPEED)
+
+
+func _on_Hurtbox_area_entered(area):
+    stats.health -= 1
+    hurtbox.start_invincibility(0.5)
+    hurtbox.create_hit_effect()

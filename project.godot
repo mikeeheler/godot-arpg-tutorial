@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Godot ARPG Tutorial"
 run/main_scene="res://World.tscn"
 
+[autoload]
+
+PlayerStats="*res://Resources/Player/PlayerStats.tscn"
+
 [display]
 
 window/size/width=320
