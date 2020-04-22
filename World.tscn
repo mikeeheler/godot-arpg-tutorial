@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Resources/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/World/Bush.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Resources/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://Resources/World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resources/Enemies/Bat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Resources/UI/HealthUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Resources/World/Tree.png" type="Texture" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -597,3 +599,19 @@ position = Vector2( 232, 40 )
 
 [node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 32, 88 )
+
+[node name="Trees" type="YSort" parent="YSort"]
+
+[node name="Tree" type="Sprite" parent="YSort/Trees"]
+position = Vector2( 72, 40 )
+texture = ExtResource( 9 )
+
+[node name="Tree2" type="Sprite" parent="YSort/Trees"]
+position = Vector2( 288, 56 )
+texture = ExtResource( 9 )
+
+[node name="Tree3" type="Sprite" parent="YSort/Trees"]
+position = Vector2( 64, 152 )
+texture = ExtResource( 9 )
+
+[node name="HealthUI" parent="." instance=ExtResource( 8 )]
